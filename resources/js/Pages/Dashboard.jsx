@@ -1,10 +1,10 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
-import { Bell, Mail, Settings, Search } from 'lucide-react';
+import { Bell, Mail, Search } from 'lucide-react';
 import { useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 
-export default function Dashboard() {
+export default function Dashboard({ auth }) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     // ✅ Fungsi logout menggunakan Inertia.js (POST request)
@@ -34,16 +34,25 @@ export default function Dashboard() {
                     <div className="relative">
                         <Bell className="text-gray-500" />
                     </div>
-                    
-                    {/* Settings Dropdown */}
+
+                    {/* User Profile Dropdown */}
                     <div className="relative">
-                        <button onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="focus:outline-none">
-                            <Settings className="text-gray-500" />
+                        <button onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="flex items-center space-x-2 focus:outline-none">
+                            <img 
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4A8PhcI7V3miXTmY26npWgI2nFvNxDRs_bg&s" 
+                                alt="Profile" 
+                                className="w-10 h-10 rounded-full border"
+                            />
+                            <div>
+                                <p className="font-semibold">{auth.user?.name || "Guest"}</p>
+                                <p className="text-gray-500 text-sm">{auth.user?.role || "User"}</p>
+                            </div>
                         </button>
+
+                        {/* Dropdown Menu */}
                         {isDropdownOpen && (
                             <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
                                 <a href="/profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
-                                {/* Replace the logout link with a button */}
                                 <button 
                                     onClick={handleLogout} 
                                     className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
@@ -52,18 +61,6 @@ export default function Dashboard() {
                                 </button>
                             </div>
                         )}
-                    </div>
-
-                    <div className="flex items-center space-x-2">
-                        <img 
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4A8PhcI7V3miXTmY26npWgI2nFvNxDRs_bg&s" 
-                            alt="Profile" 
-                            className="w-10 h-10 rounded-full border"
-                        />
-                        <div>
-                            <p className="font-semibold">SiKoLa</p>
-                            <p className="text-gray-500 text-sm">Admin</p>
-                        </div>
                     </div>
                 </div>
             </div>
