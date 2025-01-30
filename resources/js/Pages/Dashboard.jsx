@@ -19,23 +19,19 @@ export default function Dashboard() {
                 </div>
                 <div className="flex items-center space-x-6">
                     <div className="relative">
-                        <Mail className="text-gray-500" />
-                        <span className="absolute top-0 right-0 bg-red-500 text-white text-xs px-1 rounded-full">1</span>
-                    </div>
+                        <Mail className="text-gray-500" /></div>
                     <div className="relative">
-                        <Bell className="text-gray-500" />
-                        <span className="absolute top-0 right-0 bg-red-500 text-white text-xs px-1 rounded-full">2</span>
-                    </div>
+                        <Bell className="text-gray-500"/></div>
                     <Settings className="text-gray-500" />
                     <div className="flex items-center space-x-2">
                         <img 
-                            src="/profile.jpg" 
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4A8PhcI7V3miXTmY26npWgI2nFvNxDRs_bg&s" 
                             alt="Profile" 
                             className="w-10 h-10 rounded-full border"
                         />
                         <div>
-                            <p className="font-semibold">John Smilga</p>
-                            <p className="text-gray-500 text-sm">Super Admin</p>
+                            <p className="font-semibold">SiKoLa</p>
+                            <p className="text-gray-500 text-sm">Admin</p>
                         </div>
                     </div>
                 </div>
@@ -46,47 +42,47 @@ export default function Dashboard() {
                 <div className="grid grid-cols-4 gap-4 mb-6">
                     <div className="bg-white p-4 shadow-md rounded-lg">
                         <p className="text-lg font-semibold">Rp.0</p>
-                        <p className="text-gray-500">Total Purchase Due</p>
+                        <p className="text-gray-500">Total Jatuh Tempo Pembelian</p>
                     </div>
                     <div className="bg-white p-4 shadow-md rounded-lg">
                         <p className="text-lg font-semibold">Rp.0</p>
-                        <p className="text-gray-500">Total Sales Due</p>
+                        <p className="text-gray-500">Total Penjualan Terutang</p>
                     </div>
                     <div className="bg-white p-4 shadow-md rounded-lg">
                         <p className="text-lg font-semibold">Rp.0</p>
-                        <p className="text-gray-500">Total Sale Amount</p>
+                        <p className="text-gray-500">Jumlah Penjualan Total</p>
                     </div>
                     <div className="bg-white p-4 shadow-md rounded-lg">
                         <p className="text-lg font-semibold">Rp.0</p>
-                        <p className="text-gray-500">Total Expense Amount</p>
+                        <p className="text-gray-500">Jumlah Biaya Total</p>
                     </div>
                 </div>
                 <div className="grid grid-cols-4 gap-4 mb-6">
                     <div className="bg-orange-400 text-white p-4 shadow-md rounded-lg flex items-center justify-between">
                         <p className="text-xl font-bold">0</p>
-                        <p>Customers</p>
+                        <p>Pelanggan</p>
                     </div>
                     <div className="bg-blue-400 text-white p-4 shadow-md rounded-lg flex items-center justify-between">
                         <p className="text-xl font-bold">0</p>
-                        <p>Suppliers</p>
+                        <p>Pemasok</p>
                     </div>
                     <div className="bg-gray-800 text-white p-4 shadow-md rounded-lg flex items-center justify-between">
                         <p className="text-xl font-bold">0</p>
-                        <p>Purchase Invoice</p>
+                        <p>Faktur Pembelian</p>
                     </div>
                     <div className="bg-green-500 text-white p-4 shadow-md rounded-lg flex items-center justify-between">
                         <p className="text-xl font-bold">0</p>
-                        <p>Sales Invoice</p>
+                        <p>Faktur Penjualan</p>
                     </div>
                 </div>
                 <div className="bg-white p-6 shadow-md rounded-lg">
-                    <h3 className="text-lg font-semibold mb-4">Recently Added Products</h3>
+                    <h3 className="text-lg font-semibold mb-4">Produk Baru Ditambahkan</h3>
                     <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="border-b">
                                 <th className="p-2">No</th>
-                                <th className="p-2">Products</th>
-                                <th className="p-2">Price</th>
+                                <th className="p-2">Produk</th>
+                                <th className="p-2">Harga</th>
                             </tr>
                         </thead>
                         
