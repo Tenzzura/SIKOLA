@@ -1,11 +1,11 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 
 export default function Dashboard() {
+    const { users } = usePage().props;
+
     return (
-        <AuthenticatedLayout
-            
-        >
+        <AuthenticatedLayout>
             <Head title="Dashboard" />
 
             <div className="py-2">
@@ -17,20 +17,27 @@ export default function Dashboard() {
                     </div>
                 </div>
             </div>
-            <div className="bg-white p-6 shadow-md rounded-lg">
-                    <h3 className="text-lg font-semibold mb-4">Recently Added Products</h3>
-                    <table className="w-full text-left border-collapse">
-                        <thead>
-                            <tr className="border-b">
-                                <th className="p-2">No</th>
-                                <th className="p-2">Products</th>
-                                <th className="p-2">Price</th>
-                            </tr>
-                        </thead>
-                        
 
-                    </table>
-                </div>
+            <div className="bg-white p-6 shadow-md rounded-lg">
+                <table className="w-full text-left border-collapse">
+                    <thead>
+                        <tr className="border-b">
+                            <th className="p-2">No</th>
+                            <th className="p-2">Nama</th>
+                            <th className="p-2">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {users.data.map((user, index) => (
+                            <tr key={user.id} className="border-b">
+                                <td className="p-2">{index + 1}</td>
+                                <td className="p-2">{user.name}</td>
+                                <td className="p-2">{user.email}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </AuthenticatedLayout>
     );
 }
