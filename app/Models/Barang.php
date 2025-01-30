@@ -9,11 +9,9 @@ class Barang extends Model
 {
     use HasFactory;
 
-    protected $table = 'barang'; // Define table name explicitly (optional)
-
-    protected $primaryKey = 'BarangID'; // Set the primary key
-
-    public $timestamps = false; // Disable timestamps if not needed
+    protected $table = 'barang';
+    protected $primaryKey = 'BarangID';
+    public $timestamps = true;
 
     protected $fillable = [
         'NamaBarang',
@@ -21,5 +19,5 @@ class Barang extends Model
         'HargaSatuan',
         'KategoriBarang',
         'TanggalDatang',
-    ];
+    ];
 }
