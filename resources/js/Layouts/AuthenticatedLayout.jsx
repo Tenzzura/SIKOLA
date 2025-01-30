@@ -13,6 +13,7 @@ export default function Sidebar({ children }) {
     const menuItems = [
         { name: "Dashboard", href: route("dashboard"), icon: <Home size={20} /> },
         { name: "Users", href: route("users.index"), icon: <Users size={20} /> },
+        { name: "Barang", href: route("barang.index"), icon: <Users size={20} /> },
     ];
 
     return (
