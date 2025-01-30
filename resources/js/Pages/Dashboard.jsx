@@ -1,8 +1,11 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { Bell, Mail, Settings, Search } from 'lucide-react';
+import { useState } from 'react';
 
 export default function Dashboard() {
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
     return (
         <AuthenticatedLayout>
             <Head title="Dashboard" />
@@ -22,7 +25,20 @@ export default function Dashboard() {
                         <Mail className="text-gray-500" /></div>
                     <div className="relative">
                         <Bell className="text-gray-500"/></div>
-                    <Settings className="text-gray-500" />
+                    
+                    {/* Settings Dropdown */}
+                    <div className="relative">
+                        <button onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="focus:outline-none">
+                            <Settings className="text-gray-500" />
+                        </button>
+                        {isDropdownOpen && (
+                            <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
+                                <a href="/profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
+                                <a href="/logout" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
+                            </div>
+                        )}
+                    </div>
+
                     <div className="flex items-center space-x-2">
                         <img 
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4A8PhcI7V3miXTmY26npWgI2nFvNxDRs_bg&s" 
@@ -37,7 +53,7 @@ export default function Dashboard() {
                 </div>
             </div>
 
-            
+            {/* Content */}
             <div className="p-6">
                 <div className="grid grid-cols-4 gap-4 mb-6">
                     <div className="bg-white p-4 shadow-md rounded-lg">
@@ -85,8 +101,6 @@ export default function Dashboard() {
                                 <th className="p-2">Harga</th>
                             </tr>
                         </thead>
-                        
-
                     </table>
                 </div>
             </div>
