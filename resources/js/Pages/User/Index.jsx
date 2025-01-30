@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, usePage } from '@inertiajs/react';
+import { Head, usePage, Link } from '@inertiajs/react';
 
 export default function Dashboard() {
     const { users } = usePage().props;
@@ -11,8 +11,8 @@ export default function Dashboard() {
             <div className="py-2">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            User
+                        <div className="p-6 text-gray-900 flex justify-between items-center">
+                            <span>User</span>
                         </div>
                     </div>
                 </div>
@@ -22,9 +22,19 @@ export default function Dashboard() {
                 <table className="w-full text-left border-collapse">
                     <thead>
                         <tr className="border-b">
+                            <th className="p-5" colSpan="4"> 
+                            <Link href={route('users.create')} className="bg-blue-500 text-white px-4 py-2 rounded">
+                            Tambah User
+                            </Link>
+
+
+                            </th>
+                        </tr>
+                        <tr className="border-b">
                             <th className="p-2">No</th>
                             <th className="p-2">Nama</th>
                             <th className="p-2">Email</th>
+                            <th className="p-2">Role</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,6 +43,7 @@ export default function Dashboard() {
                                 <td className="p-2">{index + 1}</td>
                                 <td className="p-2">{user.name}</td>
                                 <td className="p-2">{user.email}</td>
+                                <td className="p-2">{user.roles}</td>
                             </tr>
                         ))}
                     </tbody>
