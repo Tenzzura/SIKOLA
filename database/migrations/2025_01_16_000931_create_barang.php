@@ -4,29 +4,22 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+return new class extends Migration {
+    public function up()
     {
-        Schema::create('barang', function (Blueprint $table) {
-            $table->id('BarangID');
-            $table->string('NamaBarang', 100);  
+        Schema::create('barangs', function (Blueprint $table) {
+            $table->id(); // Primary Key
+            $table->string('NamaBarang');
             $table->integer('StokBarang');
             $table->decimal('HargaSatuan', 10, 2);
-            $table->string('KategoriBarang', 50);
+            $table->string('KategoriBarang');
             $table->date('TanggalDatang');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('barang');
+        Schema::dropIfExists('barangs');
     }
 };

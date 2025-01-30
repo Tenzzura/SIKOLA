@@ -1,11 +1,19 @@
 <?php
 
+use App\Models\Barang;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BarangController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard', [
+        'barangs' => Barang::paginate(10) // Ambil data barang
+    ]);
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
