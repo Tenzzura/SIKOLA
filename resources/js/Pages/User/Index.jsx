@@ -17,6 +17,20 @@ export default function Dashboard() {
                     </div>
                 </div>
             </div>
+            <div className="bg-white p-6 shadow-md rounded-lg">
+                    <h3 className="text-lg font-semibold mb-4">Recently Added Products</h3>
+                    <table className="w-full text-left border-collapse">
+                        <thead>
+                            <tr className="border-b">
+                                <th className="p-2">No</th>
+                                <th className="p-2">Products</th>
+                                <th className="p-2">Price</th>
+                            </tr>
+                        </thead>
+                        
+
+                    </table>
+                </div>
         </AuthenticatedLayout>
     );
 }
