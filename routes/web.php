@@ -28,6 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
     Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
+
+    Route::post('/logout', function () {
+        auth()->logout();
+        return redirect('/');
+    })->name('logout');
 });
 
 require __DIR__.'/auth.php';

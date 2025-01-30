@@ -2,9 +2,16 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { Bell, Mail, Settings, Search } from 'lucide-react';
 import { useState } from 'react';
+import { Inertia } from '@inertiajs/inertia';
 
 export default function Dashboard() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    // ✅ Fungsi logout menggunakan Inertia.js (POST request)
+    const handleLogout = (e) => {
+        e.preventDefault();
+        Inertia.post("/logout");
+    };
 
     return (
         <AuthenticatedLayout>
@@ -22,9 +29,11 @@ export default function Dashboard() {
                 </div>
                 <div className="flex items-center space-x-6">
                     <div className="relative">
-                        <Mail className="text-gray-500" /></div>
+                        <Mail className="text-gray-500" />
+                    </div>
                     <div className="relative">
-                        <Bell className="text-gray-500"/></div>
+                        <Bell className="text-gray-500" />
+                    </div>
                     
                     {/* Settings Dropdown */}
                     <div className="relative">
@@ -34,7 +43,13 @@ export default function Dashboard() {
                         {isDropdownOpen && (
                             <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
                                 <a href="/profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
-                                <a href="/logout" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
+                                {/* Replace the logout link with a button */}
+                                <button 
+                                    onClick={handleLogout} 
+                                    className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                >
+                                    Logout
+                                </button>
                             </div>
                         )}
                     </div>
