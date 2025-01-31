@@ -54,7 +54,8 @@ class UserController extends Controller
                 'role' => $validated['role'],
             ]);
 
-            return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan!');
+            return to_route('users.index'); // This is Inertia-friendly
+
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Data gagal disimpan: ' . $e->getMessage());
         }

@@ -11,7 +11,9 @@ export default function CreateUser() {
 
     function submit(e) {
         e.preventDefault();
-        post(route('users.store'));
+        post(route('users.store'), {
+            onSuccess: () => window.location.href = route('users.index')
+        });
     }
 
     return (
