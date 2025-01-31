@@ -1,22 +1,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, usePage } from '@inertiajs/react';
 
-export default function Dashboard() {
-    const { barangs = { data: [] } } = usePage().props; // Default agar tidak error jika undefined
+export default function Barang() {
+    const { barang } = usePage().props;
 
     return (
         <AuthenticatedLayout>
-            <Head title="Dashboard" />
+            <Head title="Barang" />
 
-            <div className="py-2">
-                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            Barang
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
 
             <div className="bg-white p-6 shadow-md rounded-lg">
                 <table className="w-full text-left border-collapse">
@@ -28,7 +20,7 @@ export default function Dashboard() {
                         </tr>
                     </thead>
                     <tbody>
-                        {barangs.data.map((barang, index) => (
+                        {barang.data.map((barang, index) => (
                             <tr key={barang.id} className="border-b">
                                 <td className="p-2">{index + 1}</td>
                                 <td className="p-2">{barang.nama}</td>

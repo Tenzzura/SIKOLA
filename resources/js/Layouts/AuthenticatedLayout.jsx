@@ -1,3 +1,4 @@
+import ApplicationLogo from '@/Components/ApplicationLogo';
 import { useState } from "react";
 import { Link, usePage } from "@inertiajs/react";
 import { Home, Menu, Users, Package } from "lucide-react"; // Import icons
@@ -20,11 +21,7 @@ export default function Sidebar({ children }) {
                 {/* Sidebar Header */}
                 <div className="flex items-center justify-between p-2 border-b">
                     <Link href="/">
-                        <img
-                            src="https://i.ibb.co.com/M9qz1TJ/Logo-Sikola-1-removebg-preview.png"
-                            alt="Logo"
-                            className="h-11 w-auto"
-                        />
+                        <ApplicationLogo/>
                     </Link>
                     <button onClick={() => setIsCollapsed(!isCollapsed)}>
                         <Menu size={24} />

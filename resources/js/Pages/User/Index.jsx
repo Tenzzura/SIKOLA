@@ -8,15 +8,7 @@ export default function Dashboard() {
         <AuthenticatedLayout>
             <Head title="Dashboard" />
 
-            <div className="py-2">
-                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900 flex justify-between items-center">
-                            <span>User</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
 
             <div className="bg-white p-6 shadow-md rounded-lg">
                 <table className="w-full text-left border-collapse">
