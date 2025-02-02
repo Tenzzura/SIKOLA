@@ -1,16 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, usePage } from "@inertiajs/react";
 import { Home, Menu, Users, Package } from "lucide-react"; // Import icons
 
 export default function Sidebar({ children }) {
-    const user = usePage().props.auth.user;
-    const [isCollapsed, setIsCollapsed] = useState(false);
+    const { auth } = usePage().props;
+
+    // Retrieve sidebar state from localStorage or default to false
+    const [isCollapsed, setIsCollapsed] = useState(() => {
+        return localStorage.getItem("sidebarCollapsed") === "true";
+    });
+
+    // Update localStorage whenever isCollapsed changes
+    useEffect(() => {
+        localStorage.setItem("sidebarCollapsed", isCollapsed);
+    }, [isCollapsed]);
 
     // Sidebar Menu Items
     const menuItems = [
-        { name: "Dashboard", href: route("dashboard"), icon: <Home size={20} className="text-black" /> },
-        { name: "Users", href: route("users.index"), icon: <Users size={20} className="text-black" /> },
-        { name: "Barang", href: route("barang.index"), icon: <Package size={20} className="text-black" /> },
+        { name: "Dashboard", href: "dashboard", icon: <Home size={20} /> },
+        { name: "Users", href: "users.index", icon: <Users size={20} /> },
+        { name: "Barang", href: "barang.index", icon: <Package size={20} /> },
     ];
 
     return (
@@ -19,7 +28,6 @@ export default function Sidebar({ children }) {
             <div className={`h-screen bg-white border-r transition-all ${isCollapsed ? "w-16" : "w-64"}`}>
                 {/* Sidebar Header */}
                 <div className={`flex items-center p-3 border-b transition-all ${isCollapsed ? "justify-center" : "justify-between"}`}>
-                    {/* Logo & Teks hanya tampil saat sidebar penuh */}
                     {!isCollapsed && (
                         <Link href="/" className="flex items-center gap-3">
                             <img
@@ -34,7 +42,7 @@ export default function Sidebar({ children }) {
                         </Link>
                     )}
 
-                    {/* Tombol Menu */}
+                    {/* Toggle Button */}
                     <button onClick={() => setIsCollapsed(!isCollapsed)} className="p-2 text-black">
                         <Menu size={24} />
                     </button>
@@ -42,18 +50,26 @@ export default function Sidebar({ children }) {
 
                 {/* Sidebar Menu */}
                 <nav className="mt-4 space-y-2">
-                    {menuItems.map((item, index) => (
-                        <Link
-                            key={index}
-                            href={item.href}
-                            className={`flex items-center p-3 text-black hover:bg-gray-100 rounded-lg transition-all ${
-                                isCollapsed ? "justify-center mx-auto w-full" : "gap-3 mx-2"
-                            }`}
-                        >
-                            {item.icon}
-                            {!isCollapsed && <span className="text-base text-black">{item.name}</span>}
-                        </Link>
-                    ))}
+                    {menuItems.map((item, index) => {
+                        const isActive = route().current()?.startsWith(item.href);
+
+                        return (
+                            <Link
+                                key={index}
+                                href={route(item.href)}
+                                className={`flex items-center p-3 rounded-lg transition-all ${
+                                    isCollapsed ? "justify-center mx-auto w-full" : "gap-3 mx-2"
+                                } ${
+                                    isActive
+                                        ? "bg-gray-300 text-black font-semibold"
+                                        : "text-black hover:bg-gray-100"
+                                }`}
+                            >
+                                {item.icon}
+                                {!isCollapsed && <span className="text-base">{item.name}</span>}
+                            </Link>
+                        );
+                    })}
                 </nav>
             </div>
 
