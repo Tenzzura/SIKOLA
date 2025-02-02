@@ -1,5 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, Link } from '@inertiajs/react';
+import { ArrowLeft } from 'lucide-react';
 
 export default function CreateBarang() {
     const { data, setData, post, processing, errors } = useForm({
@@ -23,7 +24,15 @@ export default function CreateBarang() {
 
             <div className="flex justify-center items-center min-h-screen">
                 <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
-                    <h2 className="text-2xl font-semibold text-gray-800 text-center mb-6">Tambah Barang</h2>
+                    <div className="relative flex items-center justify-center mb-6">
+                        <Link 
+                            href={route('barang.index')}
+                            className="absolute left-0 p-2 rounded-full flex items-center justify-center bg-white hover:bg-gray-100 transition"
+                        >
+                            <ArrowLeft size={22} className="text-black" />
+                        </Link>
+                        <h2 className="text-2xl font-semibold text-gray-800">Tambah Barang</h2>
+                    </div>
 
                     <form onSubmit={submit}>
                         <div className="space-y-4">

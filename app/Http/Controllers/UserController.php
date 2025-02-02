@@ -114,15 +114,22 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
-        try {
-            $user = User::findOrFail($id);
-            $user->delete();
+{
+    try {
+        $user = User::findOrFail($id);
 
-            return redirect()->route('users.index')->with('success', 'User berhasil dihapus.');
-        } catch (\Exception $e) {
-            Log::error('Error menghapus user: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Data gagal dihapus: ' . $e->getMessage());
+        // If the user has a role, delete it first
+        if ($user->role) {
+            $user->role()->delete();
         }
+
+        $user->delete();
+
+        return redirect()->route('users.index')->with('success', 'User berhasil dihapus.');
+    } catch (\Exception $e) {
+        Log::error('Error menghapus user: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Data gagal dihapus: ' . $e->getMessage());
     }
+}
+
 }

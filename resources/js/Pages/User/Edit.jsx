@@ -1,5 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, Link } from '@inertiajs/react';
+import { ArrowLeft } from 'lucide-react';
 
 export default function EditUser({ user, roles = [] }) {
     const { data, setData, put, processing, errors } = useForm({
@@ -22,7 +23,15 @@ export default function EditUser({ user, roles = [] }) {
 
             <div className="flex justify-center items-center min-h-screen">
                 <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
-                    <h2 className="text-2xl font-semibold text-gray-800 text-center mb-6">Edit User</h2>
+                    <div className="relative flex items-center justify-center mb-6">
+                        <Link 
+                            href={route('users.index')}
+                            className="absolute left-0 p-2 rounded-full flex items-center justify-center bg-white hover:bg-gray-100 transition"
+                        >
+                            <ArrowLeft size={22} className="text-black" />
+                        </Link>
+                        <h2 className="text-2xl font-semibold text-gray-800">Edit User</h2>
+                    </div>
 
                     <form onSubmit={submit}>
                         <div className="space-y-4">
@@ -77,7 +86,7 @@ export default function EditUser({ user, roles = [] }) {
                             <button
                                 type="submit"
                                 disabled={processing}
-                                className="w-full mt-6 bg-blue-600 text-white p-3 rounded-lg"
+                                className="w-full mt-6 bg-blue-600 text-white p-3 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
                                 {processing ? 'Memperbarui...' : 'Perbarui User'}
                             </button>
