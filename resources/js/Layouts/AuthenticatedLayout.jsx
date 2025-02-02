@@ -48,7 +48,7 @@ export default function Sidebar({ children }) {
                     </button>
                 </div>
 
-                {/* Sidebar Menu */}
+                {/* Sidebar Menu a */}
                 <nav className="mt-4 space-y-2">
                     {menuItems.map((item, index) => {
                         const isActive = route().current()?.startsWith(item.href);
