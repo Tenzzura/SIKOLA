@@ -16,16 +16,6 @@ export default function Dashboard() {
                             <th className="p-2">No</th>
                             <th className="p-2">Nama</th>
                             <th className="p-2">Email</th>
-                            <th className="p-2 flex items-center justify-between">
-                                Role
-                                {/* "+" Button positioned at the left of "Role" */}
-                                <Link 
-                                    href={route('users.create')} 
-                                    className="border border-blue-500 text-blue-500 p-2 rounded-full flex items-center justify-center bg-white hover:bg-blue-100 transition"
-                                >
-                                    <Plus size={18} />
-                                </Link>
-                            </th>
                         </tr>
                     </thead>
                     <tbody>
