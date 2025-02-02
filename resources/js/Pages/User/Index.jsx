@@ -7,10 +7,8 @@ export default function Dashboard() {
     const { users } = usePage().props;
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [userIdToDelete, setUserIdToDelete] = useState(null);
-
     const { delete: deleteUser } = useForm();
 
-    // Handle delete action
     const handleDelete = (userId) => {
         setUserIdToDelete(userId);
         setIsModalOpen(true);
@@ -18,15 +16,11 @@ export default function Dashboard() {
 
     const confirmDelete = () => {
         deleteUser(route('users.destroy', userIdToDelete), {
-            method: 'DELETE', // Make sure to use DELETE method
+            method: 'DELETE',
             onSuccess: () => {
-                setIsModalOpen(false); // Close modal on success
+                setIsModalOpen(false);
             },
         });
-    };
-
-    const cancelDelete = () => {
-        setIsModalOpen(false); // Close modal when cancelled
     };
 
     return (
@@ -34,17 +28,14 @@ export default function Dashboard() {
             <Head title="Dashboard" />
 
             <div className="bg-white p-6 shadow-md rounded-lg">
-                {/* Table and other content */}
                 <table className="w-full text-left border-collapse">
                     <thead>
-                        
                         <tr className="border-b">
                             <th className="p-2">No</th>
                             <th className="p-2">Nama</th>
                             <th className="p-2">Email</th>
                             <th className="p-2">Role</th>
                             <th className="p-2 flex items-center justify-end">
-                                {/* "+" Button positioned at the left of "Role" */}
                                 <Link 
                                     href={route('users.create')} 
                                     className="border border-blue-500 text-blue-500 p-2 rounded-full flex items-center justify-center bg-white hover:bg-blue-100 transition"
@@ -61,14 +52,10 @@ export default function Dashboard() {
                                 <td className="p-2">{user.name}</td>
                                 <td className="p-2">{user.email}</td>
                                 <td className="p-2">
-                                    {user.roles && user.roles.length > 0
-                                        ? user.roles.map((role, idx) => (
-                                            <span key={idx}>{role.name}{idx < user.roles.length - 1 && ', '}</span>
-                                        ))
-                                        : <span>No Role</span>
-                                    }
+                                    {user.role ? user.role.role : <span className="text-gray-500">No Role</span>}
                                 </td>
-                                <td className="p-2 text-center flex items-center justify-end">
+
+                                <td className="p-2 flex items-center justify-end">
                                     <Link
                                         href={route('users.edit', user.id)}
                                         className="bg-yellow-500 text-white px-3 py-1 rounded mr-2"
@@ -88,7 +75,6 @@ export default function Dashboard() {
                 </table>
             </div>
 
-            {/* Modal for Delete Confirmation */}
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
@@ -102,7 +88,7 @@ export default function Dashboard() {
                                 Hapus
                             </button>
                             <button
-                                onClick={cancelDelete}
+                                onClick={() => setIsModalOpen(false)}
                                 className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-200"
                             >
                                 Batal

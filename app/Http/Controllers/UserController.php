@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
@@ -15,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10); // Load relasi role jika diperlukan, tapi di sini langsung pakai role dari user
+        $users = User::with('role')->paginate(10); // Load relasi role jika diperlukan, tapi di sini langsung pakai role dari user
         return Inertia::render('User/Index', [
             'users' => $users,
         ]);
@@ -36,28 +37,36 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|min:5|unique:users,name',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:5',
-            'role' => 'required|in:admin,petugas,user', // Validasi role menggunakan enum
+{
+    $validated = $request->validate([
+        'name' => 'required|string|min:5|unique:users,name',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|min:5',
+        'role' => 'required|in:admin,petugas,user',
+    ]);
+
+    try {
+        // Buat User
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
         ]);
 
-        try {
-            User::create([
-                'name' => $validated['name'],
-                'email' => $validated['email'],
-                'password' => Hash::make($validated['password']),
-                'role' => $validated['role'], // Simpan role langsung di users
+        // Simpan Role di Tabel Roles
+        if ($user) {
+            Role::create([
+                'user_id' => $user->id,
+                'role' => $validated['role'],
             ]);
-
-            return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan.');
-        } catch (\Exception $e) {
-            Log::error('Error menyimpan user: ' . $e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Data gagal disimpan: ' . $e->getMessage());
         }
+
+        return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan.');
+    } catch (\Exception $e) {
+        Log::error('Error menyimpan user: ' . $e->getMessage());
+        return redirect()->back()->withInput()->with('error', 'Data gagal disimpan: ' . $e->getMessage());
     }
+}
 
     /**
      * Show the form for editing the specified resource.
