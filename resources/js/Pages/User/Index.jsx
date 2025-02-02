@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, usePage, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
+import { Plus } from 'lucide-react';
 
 export default function Dashboard() {
     const { users } = usePage().props;
@@ -36,22 +37,21 @@ export default function Dashboard() {
                 {/* Table and other content */}
                 <table className="w-full text-left border-collapse">
                     <thead>
-                        <tr className="border-b">
-                            <th className="p-5" colSpan="5">
-                                <Link
-                                    href={route('users.create')}
-                                    className="bg-blue-500 text-white px-4 py-2 rounded"
-                                >
-                                    Tambah User
-                                </Link>
-                            </th>
-                        </tr>
+                        
                         <tr className="border-b">
                             <th className="p-2">No</th>
                             <th className="p-2">Nama</th>
                             <th className="p-2">Email</th>
                             <th className="p-2">Role</th>
-                            <th className="p-2 text-center">Aksi</th>
+                            <th className="p-2 flex items-center justify-end">
+                                {/* "+" Button positioned at the left of "Role" */}
+                                <Link 
+                                    href={route('users.create')} 
+                                    className="border border-blue-500 text-blue-500 p-2 rounded-full flex items-center justify-center bg-white hover:bg-blue-100 transition"
+                                >
+                                    <Plus size={18} />
+                                </Link>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,7 +68,7 @@ export default function Dashboard() {
                                         : <span>No Role</span>
                                     }
                                 </td>
-                                <td className="p-2 text-center">
+                                <td className="p-2 text-center flex items-center justify-end">
                                     <Link
                                         href={route('users.edit', user.id)}
                                         className="bg-yellow-500 text-white px-3 py-1 rounded mr-2"

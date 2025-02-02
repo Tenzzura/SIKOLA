@@ -1,5 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, usePage, Link } from '@inertiajs/react';
+import { Plus } from 'lucide-react';
 
 export default function BarangIndex() {
     const { barang } = usePage().props;
@@ -11,13 +12,7 @@ export default function BarangIndex() {
             <div className="bg-white p-6 shadow-md rounded-lg">
                 <table className="w-full text-left border-collapse">
                     <thead>
-                        <tr className="border-b">
-                            <th className="p-5" colSpan="6">
-                                <Link href={route('barang.create')} className="bg-blue-500 text-white px-4 py-2 rounded">
-                                    Tambah Barang
-                                </Link>
-                            </th>
-                        </tr>
+                        
                         <tr className="border-b">
                             <th className="p-2">No</th>
                             <th className="p-2">Nama Barang</th>
@@ -25,6 +20,15 @@ export default function BarangIndex() {
                             <th className="p-2">Harga Satuan</th>
                             <th className="p-2">Kategori</th>
                             <th className="p-2">Tanggal Datang</th>
+                            <th className="p-2 flex items-center justify-end">
+                                {/* "+" Button positioned at the left of "Role" */}
+                                <Link 
+                                    href={route('barang.create')} 
+                                    className="border border-blue-500 text-blue-500 p-2 rounded-full flex items-center justify-center bg-white hover:bg-blue-100 transition"
+                                >
+                                    <Plus size={18} />
+                                </Link>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
