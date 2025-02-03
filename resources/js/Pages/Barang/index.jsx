@@ -1,9 +1,20 @@
+
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, usePage, Link } from '@inertiajs/react';
-import { Plus } from 'lucide-react';
+import { Head, usePage, Link, useForm } from '@inertiajs/react';
+import { Plus, Edit, Trash } from 'lucide-react';
 
 export default function BarangIndex() {
     const { barang } = usePage().props;
+
+    // Fungsi untuk menangani penghapusan barang
+    const handleDelete = (id) => {
+        if (confirm('Apakah Anda yakin ingin menghapus barang ini?')) {
+            // Kirim permintaan DELETE ke backend
+            // Menggunakan Inertia.js untuk menghapus barang dengan route 'barang.destroy'
+            // Pastikan route 'barang.destroy' sesuai dengan route penghapusan barang di server
+            router.delete(route('barang.destroy', id));
+        }
+    };
 
     return (
         <AuthenticatedLayout>
@@ -12,7 +23,6 @@ export default function BarangIndex() {
             <div className="bg-white p-6 shadow-md rounded-lg">
                 <table className="w-full text-left border-collapse">
                     <thead>
-                        
                         <tr className="border-b">
                             <th className="p-2">No</th>
                             <th className="p-2">Nama Barang</th>
@@ -21,7 +31,6 @@ export default function BarangIndex() {
                             <th className="p-2">Kategori</th>
                             <th className="p-2">Tanggal Datang</th>
                             <th className="p-2 flex items-center justify-end">
-                                {/* "+" Button positioned at the left of "Role" */}
                                 <Link 
                                     href={route('barang.create')} 
                                     className="border border-blue-500 text-blue-500 p-2 rounded-full flex items-center justify-center bg-white hover:bg-blue-100 transition"
@@ -33,13 +42,31 @@ export default function BarangIndex() {
                     </thead>
                     <tbody>
                         {barang.data.map((item, index) => (
-                            <tr key={item.BarangID} className="border-b">
+                            <tr key={item.id} className="border-b">
                                 <td className="p-2">{index + 1}</td>
                                 <td className="p-2">{item.NamaBarang}</td>
                                 <td className="p-2">{item.StokBarang}</td>
                                 <td className="p-2">{item.HargaSatuan}</td>
                                 <td className="p-2">{item.KategoriBarang}</td>
                                 <td className="p-2">{item.TanggalDatang}</td>
+                                <td className="p-2 flex items-center gap-2 justify-end">
+                                    {/* Tombol Edit */}
+                                    <Link 
+                                        href={route('barang.edit', item.id)}  // Pastikan menggunakan 'id' di sini
+                                        className="text-green-500 hover:text-green-700 transition"
+                                    >
+                                        <Edit size={18} />
+                                    </Link>
+
+                                    {/* Tombol Hapus */}
+                                    <button 
+                                        onClick={() => handleDelete(item.id)}  // Panggil fungsi hapus dengan 'id' barang
+                                        className="text-red-500 hover:text-red-700 transition"
+                                    >
+                                        <Trash size={18} />
+                                    </button>
+                                    
+                                </td>
                             </tr>
                         ))}
                     </tbody>

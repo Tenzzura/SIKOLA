@@ -12,7 +12,7 @@ class Barang extends Model
     protected $table = 'barang'; // Pastikan sesuai dengan nama tabel di database
 
     protected $fillable = [
-        'BarangID',       // ID Barang (Primary Key)
+        'id',       // ID Barang (Primary Key)
         'NamaBarang',     // Nama Barang
         'StokBarang',     // Stok Barang
         'HargaSatuan',    // Harga per satuan
@@ -20,7 +20,7 @@ class Barang extends Model
         'TanggalDatang',  // Tanggal barang datang
     ];
 
-    protected $primaryKey = 'BarangID'; // Jika primary key bukan 'id', atur di sini
+    protected $primaryKey = 'id'; // Jika primary key bukan 'id', atur di sini
 
     public $timestamps = true; // Jika ingin otomatis menambahkan created_at & updated_at
 }
