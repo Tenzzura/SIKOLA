@@ -1,6 +1,5 @@
-
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, usePage, Link, useForm } from '@inertiajs/react';
+import { Head, usePage, Link, router } from '@inertiajs/react'; // Tambahkan router
 import { Plus, Edit, Trash } from 'lucide-react';
 
 export default function BarangIndex() {
@@ -9,9 +8,6 @@ export default function BarangIndex() {
     // Fungsi untuk menangani penghapusan barang
     const handleDelete = (id) => {
         if (confirm('Apakah Anda yakin ingin menghapus barang ini?')) {
-            // Kirim permintaan DELETE ke backend
-            // Menggunakan Inertia.js untuk menghapus barang dengan route 'barang.destroy'
-            // Pastikan route 'barang.destroy' sesuai dengan route penghapusan barang di server
             router.delete(route('barang.destroy', id));
         }
     };
@@ -52,7 +48,7 @@ export default function BarangIndex() {
                                 <td className="p-2 flex items-center gap-2 justify-end">
                                     {/* Tombol Edit */}
                                     <Link 
-                                        href={route('barang.edit', item.id)}  // Pastikan menggunakan 'id' di sini
+                                        href={route('barang.edit', item.id)}  
                                         className="text-green-500 hover:text-green-700 transition"
                                     >
                                         <Edit size={18} />
@@ -60,12 +56,11 @@ export default function BarangIndex() {
 
                                     {/* Tombol Hapus */}
                                     <button 
-                                        onClick={() => handleDelete(item.id)}  // Panggil fungsi hapus dengan 'id' barang
+                                        onClick={() => handleDelete(item.id)}  
                                         className="text-red-500 hover:text-red-700 transition"
                                     >
                                         <Trash size={18} />
                                     </button>
-                                    
                                 </td>
                             </tr>
                         ))}
