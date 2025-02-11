@@ -6,13 +6,12 @@ use App\Http\Controllers\BarangController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+Use App\Models\Barang;
 
-// Rute Dashboard (Menampilkan Barang)
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard', [
-        'barang' => \App\Models\Barang::paginate(10) // Ambil data barang dengan pagination
-    ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+    $barangs = Barang::orderBy('created_at', 'desc')->get();
+    return Inertia::render('Dashboard', ['barangs' => $barangs]);
+})->name('dashboard')->middleware(['auth']);
 
 // Rute Welcome Page
 Route::get('/', function () {
