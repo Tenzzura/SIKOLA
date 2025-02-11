@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, usePage } from "@inertiajs/react";
-import { Home, Menu, Users, Package } from "lucide-react"; // Import icons
+import { Home, Menu, Users, Package, FileText } from "lucide-react"; // Import FileText icon for reports
 
 export default function Sidebar({ children }) {
     const { auth } = usePage().props;
@@ -20,6 +20,7 @@ export default function Sidebar({ children }) {
         { name: "Dashboard", href: "dashboard", icon: <Home size={20} /> },
         { name: "Users", href: "users.index", icon: <Users size={20} /> },
         { name: "Barang", href: "barang.index", icon: <Package size={20} /> },
+        { name: "Laporan", href: "laporan.index", icon: <FileText size={20} /> }, // New report menu
     ];
 
     return (
@@ -48,7 +49,7 @@ export default function Sidebar({ children }) {
                     </button>
                 </div>
 
-                {/* Sidebar Menu a */}
+                {/* Sidebar Menu */}
                 <nav className="mt-4 space-y-2">
                     {menuItems.map((item, index) => {
                         const isActive = route().current()?.startsWith(item.href);

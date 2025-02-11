@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BarangController;
@@ -49,7 +50,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/barang/{id}', [BarangController::class, 'update'])->name('barang.update'); // Update barang
     Route::delete('/barang/{id}', [BarangController::class, 'destroy'])->name('barang.destroy'); // Hapus barang
 
+    Route::resource('laporan', LaporanController::class);
     // Logout
+    
     Route::post('/logout', function () {
         auth()->logout();
         return redirect('/');
